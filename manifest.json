@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "Star Platinum",
+    "version": "0.1.0",
+    "description": "Proyek auto upload.",
+    "permissions":["storage", "tabs"],
+    "icons": {
+      "48": "icons/jojo.png",
+      "96": "icons/sp.png"
+    },
+    "sidebar_action": {
+      "default_title": "Star Platinum",
+      "default_panel": "sidebar/panel.html"  
+    }
+
+}
+  
