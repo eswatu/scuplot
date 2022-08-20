@@ -5,9 +5,9 @@ active tab ID.
 */
 let numIndex = 0;
 // Listen for a file being selected through the file picker
-const inputElement = document.getElementById("input");
+const inputElement = document.getElementById("iiinput");
 inputElement.addEventListener("change", handlePicked, false);
-
+let filestoupload;
 // Listen for a file being dropped into the drop zone
 const dropbox = document.getElementById("drop_zone");
 dropbox.addEventListener("dragenter", dragenter, false);
@@ -16,27 +16,61 @@ dropbox.addEventListener("drop", drop, false);
 
 // Get the image file if it was chosen from the pick list
 function handlePicked() {
-  let tablediv = document.getElementById("listFile");
-
-  for (let index = 0; index < inputElement.files.length; index++) {
-    const headrow = document.createElement("tr");
-    //buat element td
-    const detail0 = document.createElement("td");
-    const detail1 = document.createElement("td");
-    const detail2 = document.createElement("td");
-    //isi element td
-    detail0.innerHTML = index + 1;
-    detail1.innerHTML = inputElement.files[index].name;
-    detail2.innerHTML = Math.round(inputElement.files[index].size / 1000) + " kb";
-    //masukkan ke tabel element tr
-    headrow.appendChild(detail0);
-    headrow.appendChild(detail1);
-    headrow.appendChild(detail2);
+  let tablediv = document.getElementById("rowTable");
+  while (tablediv.firstChild) {
+    tablediv.removeChild(tablediv.lastElementChild);
+  }
+  filestoupload = inputElement.files;
+  console.log(filestoupload);
+  for (let index = 0; index < filestoupload.length; index++) {
+    const row = crow(filestoupload[index], index);
     //masukkan ke tabel
-    tablediv.appendChild(headrow);
+    tablediv.appendChild(row);
   }
 }
+
+function crow(file, i){
+  const row = document.createElement("tr");
+  //buat element td
+  const detail0 = document.createElement("td");
+  const detail1 = document.createElement("td");
+  const detail2 = document.createElement("td");
+  const detail3 = document.createElement("td");
+  //isi element td
+  detail0.innerHTML = i + 1;
+  detail1.innerHTML = file.name;
+  detail2.innerHTML = Math.round(file.size / 1000) + " kb";
+  detail3.innerHTML = file.size > 198000 ? "Invalid" : "Valid";
+  detail3.id = "status" + i;
+  //masukkan ke tabel element tr
+  row.appendChild(detail0);
+  row.appendChild(detail1);
+  row.appendChild(detail2);
+  row.appendChild(detail3);
+  //masukkan ke tabel
+  return row;
+}
+
+function clickId(name) {
+  document.getElementById(name).click();
+}
+function runUpload(){
+  for (let index = 0; index < filestoupload.length; index++) {
+    clickId("satu");
+    clickId("dua");
+    const ip = document.getElementById("input");
+    ip.value = filestoupload[index].value;
+    const fileName = document.getElementById("fileName");
+    fileName.innerText = filestoupload.item(index);
+    clickId("tiga");
+  }
+}
+
 function clearInput(){
+  let tablediv = document.getElementById("rowTable");
+  while (tablediv.firstChild) {
+    tablediv.removeChild(tablediv.lastElementChild);
+  }
   inputElement.value = null;
 }
 

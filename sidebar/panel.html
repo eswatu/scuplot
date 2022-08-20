@@ -9,20 +9,25 @@
 
   <body>
     <form>
-        <input type="file" accept="image/*" id="input" multiple>
+        <input type="file" accept="image/*" id="iiinput" multiple>
         <button (click)="clearInput">Hapus File</button>
     </form>
     <div id="tableFile">
       <table id="listFile">
-        <tr>
-          <th>
-            Nomor
-          </th>
-          <th>
-            Nama File
-          </th>
-          <th>Ukuran</th>
-        </tr>
+        <thead id="headerTabel">
+          <tr>
+            <th>
+              Nomor
+            </th>
+            <th>
+              Nama File
+            </th>
+            <th>Ukuran</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+          <tbody id="rowTable"></tbody>
+        <div id="endTable"></div>
       </table>
     </div>
 
