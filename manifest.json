@@ -9,6 +9,7 @@
       "96": "icons/sp.png"
     },
     "sidebar_action": {
+      "default_icon":"icons/jojo.png",
       "default_title": "Star Platinum",
       "default_panel": "sidebar/panel.html"  
     }

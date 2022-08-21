@@ -10,7 +10,7 @@
   <body>
     <form>
         <input type="file" accept="image/*" id="iiinput" multiple>
-        <button (click)="clearInput">Hapus File</button>
+        <button (click)="clearInput" class="tbhapus">Hapus File</button>
     </form>
     <div id="tableFile">
       <table id="listFile">
@@ -29,6 +29,10 @@
           <tbody id="rowTable"></tbody>
         <div id="endTable"></div>
       </table>
+    </div>
+    <div class="btnblw">
+      <button class="button" id="startbtn">Mulai Upload</button>
+      <button class="button" id="stopbtn">Stop Upload</button>
     </div>
 
 

@@ -14,6 +14,9 @@ dropbox.addEventListener("dragenter", dragenter, false);
 dropbox.addEventListener("dragover", dragover, false);
 dropbox.addEventListener("drop", drop, false);
 
+//variabel on run
+var onrun = true;
+
 // Get the image file if it was chosen from the pick list
 function handlePicked() {
   let tablediv = document.getElementById("rowTable");
@@ -29,6 +32,7 @@ function handlePicked() {
   }
 }
 
+
 function crow(file, i){
   const row = document.createElement("tr");
   //buat element td
@@ -42,6 +46,7 @@ function crow(file, i){
   detail2.innerHTML = Math.round(file.size / 1000) + " kb";
   detail3.innerHTML = file.size > 198000 ? "Invalid" : "Valid";
   detail3.id = "status" + i;
+  detail3.className = file.size > 198000 ? "invalid" : "valid";
   //masukkan ke tabel element tr
   row.appendChild(detail0);
   row.appendChild(detail1);
@@ -50,7 +55,9 @@ function crow(file, i){
   //masukkan ke tabel
   return row;
 }
-
+function waitWindow(wName, next){
+  document.addEventListener(wName,clickId(next), {once: true});
+}
 function clickId(name) {
   document.getElementById(name).click();
 }
@@ -64,6 +71,10 @@ function runUpload(){
     fileName.innerText = filestoupload.item(index);
     clickId("tiga");
   }
+}
+
+function stopCycle(){
+  
 }
 
 function clearInput(){
