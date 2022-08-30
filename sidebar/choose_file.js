@@ -8,11 +8,6 @@ let numIndex = 0;
 const inputElement = document.getElementById("iiinput");
 inputElement.addEventListener("change", handlePicked, false);
 let filestoupload;
-// Listen for a file being dropped into the drop zone
-const dropbox = document.getElementById("drop_zone");
-dropbox.addEventListener("dragenter", dragenter, false);
-dropbox.addEventListener("dragover", dragover, false);
-dropbox.addEventListener("drop", drop, false);
 
 //variabel on run
 var onrun = true;
@@ -55,9 +50,7 @@ function crow(file, i){
   //masukkan ke tabel
   return row;
 }
-function waitWindow(wName, next){
-  document.addEventListener(wName,clickId(next), {once: true});
-}
+
 function clickId(name) {
   document.getElementById(name).click();
 }
@@ -83,47 +76,4 @@ function clearInput(){
     tablediv.removeChild(tablediv.lastElementChild);
   }
   inputElement.value = null;
-}
-
-// Get the image file if it was dragged into the sidebar drop zone
-function drop(e) {
-  e.stopPropagation();
-  e.preventDefault();
-  displayFile(e.dataTransfer.files);
-}
-
-/* 
-Insert the content script and send the image file ObjectURL to the content script using a 
-message.
-*/ 
-function displayFile(fileList) {
-  const imageURL = window.URL.createObjectURL(fileList[0]);
-
-  browser.tabs.executeScript({
-    file: "/content_scripts/content.js"
-    }).then(messageContent)
-      .catch(reportError);
-
-  function messageContent() {
-    const gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
-    gettingActiveTab.then((tabs) => {
-      browser.tabs.sendMessage(tabs[0].id, {imageURL});
-    });
-  }
-
-  function reportError(error) {
-    console.error(`Could not inject content script: ${error}`);
-  }
-}
-
-// Ignore the drag enter event - not used in this extension
-function dragenter(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
-
-// Ignore the drag over event - not used in this extension
-function dragover(e) {
-  e.stopPropagation();
-  e.preventDefault();
 }

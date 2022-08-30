@@ -12,6 +12,10 @@
       "default_icon":"icons/jojo.png",
       "default_title": "Star Platinum",
       "default_panel": "sidebar/panel.html"  
-    }
+    },
+    "content_scripts":[{
+      "matches":["http://ceisa.customs.go.id/SSOService/LaunchApps?appCode=36&appState=start"],
+      "js":["background.js"]
+    }]
 }
   
