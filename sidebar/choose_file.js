@@ -8,6 +8,11 @@ let numIndex = 0;
 const inputElement = document.getElementById("iiinput");
 inputElement.addEventListener("change", handlePicked, false);
 let filestoupload;
+const btnStart = document.getElementById("startbtn");
+btnStart.addEventListener("click", runUpload, false);
+
+//observer
+const doc = document.getElementsByClassName("gecko gecko104");
 
 //variabel on run
 var onrun = true;
@@ -26,7 +31,6 @@ function handlePicked() {
     tablediv.appendChild(row);
   }
 }
-
 
 function crow(file, i){
   const row = document.createElement("tr");
@@ -51,15 +55,35 @@ function crow(file, i){
   return row;
 }
 
-function clickId(name) {
-  document.getElementById(name).click();
+function clickId(name, cls) {
+  const observer = new MutationObserver((mutations, obs) => {
+    const pilih = document.getElementsByClassName(cls);
+    for (let index = els; index < pilih.length; index++) {
+      const element = pilih[index];
+      if (element.innerHTML === name) {
+        //element.click();
+        element.innerHTML = 'Oke';
+        console.log('i click' + name);
+      } else {
+        console.log("not found");
+      }
+        break;
+      }
+  });
+
+  observer.observe(document, {
+    childList: true,
+    subtree: true
+  });
+
+    console.log('done running ' + name); 
 }
+
 function runUpload(){
   for (let index = 0; index < filestoupload.length; index++) {
-    clickId("satu");
-    clickId("dua");
-    const ip = document.getElementById("input");
-    ip.value = filestoupload[index].value;
+    clickId('Cari', 'z-button-cm');
+    //const ip = document.getElementById("input");
+    //ip.value = filestoupload[index].value;
     const fileName = document.getElementById("fileName");
     fileName.innerText = filestoupload.item(index);
     clickId("tiga");

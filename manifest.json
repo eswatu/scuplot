@@ -3,7 +3,7 @@
     "name": "Star Platinum",
     "version": "0.1.0",
     "description": "Proyek auto upload.",
-    "permissions":["storage", "tabs"],
+    "permissions":["storage", "activeTab", "find"],
     "icons": {
       "48": "icons/jojo.png",
       "96": "icons/sp.png"
@@ -13,9 +13,9 @@
       "default_title": "Star Platinum",
       "default_panel": "sidebar/panel.html"  
     },
-    "content_scripts":[{
-      "matches":["http://ceisa.customs.go.id/SSOService/LaunchApps?appCode=36&appState=start"],
-      "js":["background.js"]
-    }]
+    "background":{
+      "scripts":["background.js"]
+    },
+    "content_security_policy": "script-src 'self'"
 }
   
